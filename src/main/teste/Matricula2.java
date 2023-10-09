@@ -3,13 +3,13 @@ package teste;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Matricula
+public class Matricula2
 {
 	private static final BigDecimal TRES = BigDecimal.valueOf(3l);
 
-	private static final BigDecimal CINCO = BigDecimal.valueOf(5l);
+	private static final BigDecimal QUATRO = BigDecimal.valueOf(4l);
 
-	private static final BigDecimal SETE = BigDecimal.valueOf(7l);
+	private static final BigDecimal SEIS = BigDecimal.valueOf(6l);
 
 	private Turma turma;
 
@@ -23,7 +23,7 @@ public class Matricula
 
 	private Integer frequencia;
 
-	private StatusAprovacao status;
+	private StatusAprovacao2 status;
 
 	public BigDecimal nota1()
 	{
@@ -40,7 +40,7 @@ public class Matricula
 		return this.nota3;
 	}
 
-	public StatusAprovacao status()
+	public StatusAprovacao2 status()
 	{
 		return this.status;
 	}
@@ -60,13 +60,7 @@ public class Matricula
 		this.nota3 = nota3;
 	}
 
-	/**
-	 * Segue as regras estabelecidas pelos artigos do regulamento de graduação da
-	 * UFRN:
-	 * http://www.sistemas.ufrn.br/download/sigaa/public/regulamento_dos_cursos_de_graduacao.pdf
-	 * 
-	 * A partir do artigo 104
-	 */
+
 	public void consolidarParcialmente()
 	{
 
@@ -77,11 +71,11 @@ public class Matricula
 
 			if (mediaParcial.compareTo(TRES) < 0)
 			{
-				this.status = StatusAprovacao.REMF;
+				this.status = StatusAprovacao2.REMF;
 			}
 			else
 			{
-				this.status = StatusAprovacao.REPF;
+				this.status = StatusAprovacao2.REPF;
 			}
 
 		}
@@ -89,26 +83,20 @@ public class Matricula
 		{
 			if(mediaParcial.compareTo(TRES) < 0)
 			{
-				this.status = StatusAprovacao.REP;
+				this.status = StatusAprovacao2.REPR;
 			}
-			else if(mediaParcial.compareTo(CINCO) < 0)
+			else if(mediaParcial.compareTo(SEIS) < 0)
 			{
-				this.status = StatusAprovacao.REC;
-			}
-			else if(mediaParcial.compareTo(SETE) < 0)
-			{
-				if(nota1.compareTo(TRES) < 0 || nota2.compareTo(TRES) < 0 || nota3.compareTo(TRES) < 0)
+				if(nota1.compareTo(QUATRO) < 0 || 
+				   nota2.compareTo(QUATRO) < 0 || 
+				   nota3.compareTo(QUATRO) < 0)
 				{
-					this.status = StatusAprovacao.REC;
-				}
-				else
-				{
-					this.status = StatusAprovacao.APRN;
+					this.status = StatusAprovacao2.REPO;
 				}
 			}
 			else
 			{
-				this.status = StatusAprovacao.APR;
+				this.status = StatusAprovacao2.APRD;
 			}
 		}
 	}
