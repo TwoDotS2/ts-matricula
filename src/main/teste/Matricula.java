@@ -5,11 +5,13 @@ import java.math.RoundingMode;
 
 public class Matricula
 {
+	private static final Integer UM = 1;
+
 	private static final BigDecimal TRES = BigDecimal.valueOf(3l);
 
-	private static final BigDecimal CINCO = BigDecimal.valueOf(5l);
+	private static final BigDecimal QUATRO = BigDecimal.valueOf(4l);
 
-	private static final BigDecimal SETE = BigDecimal.valueOf(7l);
+	private static final BigDecimal SEIS = BigDecimal.valueOf(6l);
 
 	private Turma turma;
 
@@ -60,17 +62,11 @@ public class Matricula
 		this.nota3 = nota3;
 	}
 
-	/**
-	 * Segue as regras estabelecidas pelos artigos do regulamento de graduação da
-	 * UFRN:
-	 * http://www.sistemas.ufrn.br/download/sigaa/public/regulamento_dos_cursos_de_graduacao.pdf
-	 * 
-	 * A partir do artigo 104
-	 */
+
 	public void consolidarParcialmente()
 	{
 
-		BigDecimal mediaParcial = nota1.add(nota2).add(nota3).divide(TRES, RoundingMode.HALF_EVEN);
+		BigDecimal mediaParcial = nota1.add(nota2).add(nota3).divide(TRES, UM, RoundingMode.HALF_EVEN);
 
 		if (frequencia < 75) 
 		{
@@ -89,26 +85,25 @@ public class Matricula
 		{
 			if(mediaParcial.compareTo(TRES) < 0)
 			{
-				this.status = StatusAprovacao.REP;
+				this.status = StatusAprovacao.REPR;
 			}
-			else if(mediaParcial.compareTo(CINCO) < 0)
+			else if(mediaParcial.compareTo(SEIS) < 0)
 			{
-				this.status = StatusAprovacao.REC;
-			}
-			else if(mediaParcial.compareTo(SETE) < 0)
-			{
-				if(nota1.compareTo(TRES) < 0 || nota2.compareTo(TRES) < 0 || nota3.compareTo(TRES) < 0)
-				{
-					this.status = StatusAprovacao.REC;
-				}
-				else
-				{
-					this.status = StatusAprovacao.APRN;
-				}
+				this.status = StatusAprovacao.REPO;
 			}
 			else
 			{
-				this.status = StatusAprovacao.APR;
+				if(nota1.compareTo(QUATRO) < 0 || 
+				   nota2.compareTo(QUATRO) < 0 || 
+				   nota3.compareTo(QUATRO) < 0) {
+					this.status = StatusAprovacao.APRD;
+					
+				} else {
+					this.status = StatusAprovacao.REPO;
+					
+				}
+					
+				
 			}
 		}
 	}
