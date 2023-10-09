@@ -15,22 +15,32 @@ class MatriculaTest {
 	
     @ParameterizedTest
 	@CsvSource({
-			"0,2.9,0,0,REMF",
-			"2.1,2,2,75,REP",
-			"4.9,3.1,4,0,REPF",
-			"4.9,4.9,4.9,75,REC",
-			"5.1,6.9,6.9,100,APRN",
-			"7,10,8,100,APR",
-			"0,3,3,100,REC",
-			"3,0,3,100,REC",
-			"3,3,0,100,REC",
-			"2,10,6,100,REC",
-			"10,2,6,100,REC",
-			"10,6,2,100,REC",
+			"4.0, 4.0, 4.0, 75, APRD",
+			"2.0, 8.0, 8.0, 75, REPO",
+			"7.1, 3.9, 7.0, 75, REPO",
+			"9.0, 9.0, 0.0, 75, REPO",
+			"4.0, 7.0, 7.0, 74, REPF",
+			"3.0, 7.0, 7.0, 74, REMF",
+			"7.0, 3.0, 7.0, 74, REMF",
+			"7.0, 7.0, 3.0, 74, REMF",
+			"3.0, 3.0, 3.0, 75, REPO",
+			"0.0, 0.0, 9.0, 75, REPO",
+			"3.0, 3.0, 2.9, 75, REPR",
+			"2.9, 3.0, 3.0, 75, REPO",
+			"2.9, 3.0, 3.0, 74, REMF",
+			"10.0, 10.0, 10.0, -1, REPF",
+			"10.0, 10.0, -1.0, 75, REPO",
+			"-1.0, -1.0, -1.0, 75, REPR",
+			"13.0, 9.0, 8.0, 75, APRD",
+			"10.0, 10.0, 10.0, 101, APRD",
+			"13.0, 13.0, 13.0, 75, APRD"
 			})
-	void testarConsolidacaoParcial(BigDecimal nota1, BigDecimal nota2, BigDecimal nota3, Integer frequencia, StatusAprovacao statusEsperado) {
+    
+	void testarConsolidacaoParcial(String numeroCenario, BigDecimal nota1, BigDecimal nota2, 
+			BigDecimal nota3, Integer frequencia, StatusAprovacao statusEsperado) {
 		Matricula m = new Matricula();
 
+		
 		m.registrarNota1(nota1);
 		m.registrarNota2(nota2);
 		m.registrarNota3(nota3);
