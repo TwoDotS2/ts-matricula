@@ -66,7 +66,9 @@ public class Matricula
 	public void consolidarParcialmente()
 	{
 
-		BigDecimal mediaParcial = nota1.add(nota2).add(nota3).divide(TRES, UM, RoundingMode.HALF_EVEN);
+		BigDecimal mediaParcial = nota1.add(nota2)
+										.add(nota3)
+										.divide(TRES, UM, RoundingMode.HALF_EVEN);
 
 		if (frequencia < 75) 
 		{
@@ -93,9 +95,9 @@ public class Matricula
 			}
 			else
 			{
-				if(nota1.compareTo(QUATRO) < 0 || 
-				   nota2.compareTo(QUATRO) < 0 || 
-				   nota3.compareTo(QUATRO) < 0) {
+				if(nota1.compareTo(QUATRO) >= 0 && 
+				   nota2.compareTo(QUATRO) >= 0 && 
+				   nota3.compareTo(QUATRO) >= 0) {
 					this.status = StatusAprovacao.APRD;
 					
 				} else {
