@@ -3,10 +3,8 @@ package teste;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Matricula
+public class Matricula2
 {
-	private static final Integer UM = 1;
-
 	private static final BigDecimal TRES = BigDecimal.valueOf(3l);
 
 	private static final BigDecimal QUATRO = BigDecimal.valueOf(4l);
@@ -25,7 +23,7 @@ public class Matricula
 
 	private Integer frequencia;
 
-	private StatusAprovacao status;
+	private StatusAprovacao2 status;
 
 	public BigDecimal nota1()
 	{
@@ -42,7 +40,7 @@ public class Matricula
 		return this.nota3;
 	}
 
-	public StatusAprovacao status()
+	public StatusAprovacao2 status()
 	{
 		return this.status;
 	}
@@ -66,20 +64,18 @@ public class Matricula
 	public void consolidarParcialmente()
 	{
 
-		BigDecimal mediaParcial = nota1.add(nota2)
-										.add(nota3)
-										.divide(TRES, UM, RoundingMode.HALF_EVEN);
+		BigDecimal mediaParcial = nota1.add(nota2).add(nota3).divide(TRES, RoundingMode.HALF_EVEN);
 
 		if (frequencia < 75) 
 		{
 
 			if (mediaParcial.compareTo(TRES) < 0)
 			{
-				this.status = StatusAprovacao.REMF;
+				this.status = StatusAprovacao2.REMF;
 			}
 			else
 			{
-				this.status = StatusAprovacao.REPF;
+				this.status = StatusAprovacao2.REPF;
 			}
 
 		}
@@ -87,25 +83,20 @@ public class Matricula
 		{
 			if(mediaParcial.compareTo(TRES) < 0)
 			{
-				this.status = StatusAprovacao.REPR;
+				this.status = StatusAprovacao2.REPR;
 			}
 			else if(mediaParcial.compareTo(SEIS) < 0)
 			{
-				this.status = StatusAprovacao.REPO;
+				if(nota1.compareTo(QUATRO) < 0 || 
+				   nota2.compareTo(QUATRO) < 0 || 
+				   nota3.compareTo(QUATRO) < 0)
+				{
+					this.status = StatusAprovacao2.REPO;
+				}
 			}
 			else
 			{
-				if(nota1.compareTo(QUATRO) >= 0 && 
-				   nota2.compareTo(QUATRO) >= 0 && 
-				   nota3.compareTo(QUATRO) >= 0) {
-					this.status = StatusAprovacao.APRD;
-					
-				} else {
-					this.status = StatusAprovacao.REPO;
-					
-				}
-					
-				
+				this.status = StatusAprovacao2.APRD;
 			}
 		}
 	}
